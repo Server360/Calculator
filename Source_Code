@@ -1,0 +1,19 @@
+// Code assumes that you have already installed the 'mathjs' Velo Package.
+
+import { evaluate } from 'mathjs';
+
+$w.onReady(function () {
+    $w('#yourButtonElement').onClick((event) => {
+        try {
+            const mathProblem = $w('#yourInputElement').value;
+            const solution = evaluate(mathProblem);
+            const existingText = $w('#yourAnswerTextElement').value;
+            $w('#yourAnswerTextElement').value = existingText + mathProblem + " = " + solution.toString() + '\n';
+            $w('#yourInputElement').value = '';
+        } catch (error) {
+            const existingText = $w('#yourAnswerTextElement').value;
+            const mathProblem = $w('#yourInputElement').value;
+            $w('#yourAnswerTextElement').value = existingText + "Error" + '\n';
+        }
+    });
+});
